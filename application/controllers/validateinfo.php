@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-class ValidateInfo extends CI_Controller {
+class Validateinfo extends CI_Controller {
 
     public function index() {
         $this->load->helper(array('form', 'url'));

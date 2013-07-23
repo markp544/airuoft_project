@@ -7,9 +7,9 @@ class Index extends CI_Controller {
 	
 	//Index function.
 	function index() {
-		//$this->load->helper(array('form','url'));
+		$this->load->helper(array('form','url'));
 		
-		//$this->load->library('form_validation');
+		$this->load->library('form_validation');
 		
 		$this->load->view('index');
 	}

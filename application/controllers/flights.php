@@ -7,15 +7,17 @@ class Flights extends CI_Controller {
 	}
 	
 	public function index() {
-		$this->load->model('Flights_model');
+		$this->load->model('flights_model');
 		
-		$flights = $this->Flights_model->getFlights();
+		$flights = $this->flights_model->getFlights();
+		$campus = $this->flights_model->get_campus_table();
 		
 		$data['flights'] = $flights;
+		$data['campus'] = $campus;
 		
-		$data['title'] = 'Flights Avaiable';
-		$data['main'] = 'flights.php';
-		
+		$data['title'] = 'Flights Available';
+		$data['main'] = 'flights.php';	//??
+		//print_r($data['flights']);
 		$this->load->view('flights',$data);
 
 	}

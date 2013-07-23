@@ -1,9 +1,20 @@
 <?php
-class Flights extends CI_Model {
+class Flights_model extends CI_Model {
 	
     function __construct() {
 		parent::__construct();
 		$this->load->database();
+    }
+    
+    //For temporarily for testing and debugging.
+    public function get_campus_table() {
+    	$query = $this->db->query("SELECT id,name FROM campus;");
+    	$result = $query->result();
+    	if ($result !== FALSE)
+    	{
+    		print_r($result);
+    	}
+    	return $result;
     }
 
     public function getFlights() {

@@ -27,6 +27,10 @@ class Validateinfo extends CI_Controller {
             $data['main'] = 'customerInfoForm';
         } else {
             //$this->load->view('summary');
+            $data['firstname'] = $this->input->post('firstname');
+            $data['lastname'] = $this->input->post('lastname');
+            $data['creditcard'] = $this->input->post('creditcard');
+            $data['expirationdate'] = $this->input->post('expirationdate');
             $data['main'] = 'summary';
         }
         

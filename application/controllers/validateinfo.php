@@ -12,7 +12,7 @@ class Validateinfo extends CI_Controller {
 
         $this->load->library('form_validation');
         
-        $data['main'] = 'customerInfoForm';
+        $data['main'] = 'customerinfoform';
 
         $this->load->view('template', $data);
     }
@@ -24,7 +24,7 @@ class Validateinfo extends CI_Controller {
 
         if ($this->form_validation->run('registerCustomerInfo') == FALSE) {
             //$this->load->view('customerInfoForm');
-            $data['main'] = 'customerInfoForm';
+            $data['main'] = 'customerinfoform';
         } else {
             //$this->load->view('summary');
             $data['main'] = 'summary';

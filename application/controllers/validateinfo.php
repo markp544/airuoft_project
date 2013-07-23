@@ -11,8 +11,10 @@ class Validateinfo extends CI_Controller {
         $this->load->helper(array('form', 'url'));
 
         $this->load->library('form_validation');
+        
+        $data['main'] = 'customerInfoForm';
 
-        $this->load->view('customerInfoForm');
+        $this->load->view('template', $data);
     }
 
     function register() {
@@ -21,10 +23,15 @@ class Validateinfo extends CI_Controller {
         $this->load->library('form_validation');
 
         if ($this->form_validation->run('registerCustomerInfo') == FALSE) {
-            $this->load->view('customerInfoForm');
+            //$this->load->view('customerInfoForm');
+            $data['main'] = 'customerInfoForm';
         } else {
-            $this->load->view('summary');
+            //$this->load->view('summary');
+            $data['main'] = 'summary';
         }
+        
+        $this->load->view('template', $data);
+        
     }
 
     function expirationDateCheck($date) {

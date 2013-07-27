@@ -38,7 +38,11 @@
 |
 */
 
+<<<<<<< HEAD
 $route['default_controller'] = "admin";
+=======
+$route['default_controller'] = "index";
+>>>>>>> ad8914ae078f17e711556480736ec58333d3511b
 $route['404_override'] = '';
 
 

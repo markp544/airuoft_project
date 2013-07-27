@@ -29,7 +29,7 @@
     echo '<br/>';
     echo '<br/>';
 
-    echo form_label('Credit Card Expiration Date');
+    echo form_label('Credit Card Expiration Date (MM/YY)');
     echo "&nbsp";
     echo form_input('expirationdate', set_value('expirationdate'), 'required oninput="validateExpirationDate(this);"');
     echo form_error('expirationdate');

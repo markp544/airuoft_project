@@ -7,6 +7,13 @@
 
 class Validateinfo extends CI_Controller {
 
+	
+	//Do we need a constructor for start_session()?
+	function __construct() {
+		parent::__construct();
+		$this->load->library('session');
+	}
+	
     public function index() {
         $this->load->helper(array('form', 'url'));
 

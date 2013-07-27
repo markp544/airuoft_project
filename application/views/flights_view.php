@@ -11,10 +11,13 @@ echo "<tr><th>Name</th><th>Time</th><th>Avaiability</th></tr>";
 
 foreach ($flights as $flight) {
 	echo "<tr>";
+	//echo "<td>" . $flight->id . "</td>";
 	echo "<td>" . $flight->name . "</td>";
 	echo "<td>" . $flight->time . "</td>";
 	echo "<td>" . $flight->available . "</td>";
-	echo "<td>" . anchor("validateinfo",'Pick Seats') . "</td>";
+	//echo "<td>" . anchor("seats/getseats/$flight->id",'Pick Seats') . "</td>";
+	echo "<td>" . anchor("seats",'Pick Seats') . "</td>";
+	//echo "<td>" . anchor("validateinfo",'Pick Seats') . "</td>";
 	echo "</tr>";
 }
 echo "</table>";

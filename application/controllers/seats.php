@@ -22,7 +22,7 @@ class Seats extends CI_Controller {
 		$seats = $this->seats_model->getSeats($fid);
 		$data['seats'] = $seats;
 		$data['title'] = "Seat Selection";
-		$data['main'] = 'seatview.php';
+		$data['main'] = 'seatview2.php';
 		$this->load->view('template',$data);
 	}
 }

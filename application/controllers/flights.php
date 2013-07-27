@@ -49,10 +49,9 @@ class Flights extends CI_Controller {
 				'Jun'=>'06','Jul'=>'07','Aug'=>'08','Sep'=>'09','Oct'=>'10','Nov'=>'11','Dec'=>'12');
 		$month = substr($date,4,3);
 		$day = substr($date,8,2);
+		echo $day;
 		$year = substr($date,11,4);
-		$unix_time = gmmktime(0,0,0,$months[$month]*1,$day*1,$year*1);
-		$date_res = substr(unix_to_human($unix_time),0,10);
-		
+		$date_res = $year . "-" . $months[$month] . "-" . $day;
 		return $date_res;
 	} 
 	

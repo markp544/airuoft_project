@@ -35,12 +35,13 @@ class Validateinfo extends CI_Controller {
         } else {
             //$this->load->view('summary');
 
-            if (isset($_SESSION['flight_id']) && isset($_SESSION['seat'])) {
-                $flight_id = $_SESSION['flight_id'];
-                $seat = $_SESSION['seat'];
+            $flight_id = $this->input->post('flight_id');
+            $seat = $this->input->post('seatpicked');
                 
-                unset($_SESSION['flight_id']);
-                unset($_SESSION['seat']);
+            if ($flight_id && $seat) {
+                
+                unset($_POST['flight_id']);
+                unset($_POST['seatpicked']);
                 
                 $data['firstname'] = $this->input->post('firstname');
                 $data['lastname'] = $this->input->post('lastname');

@@ -1,3 +1,6 @@
+
+
+
 $('#seat1').bind({
 	click: function() {
 		var seat1color = $('#seat1').attr('class');
@@ -19,7 +22,7 @@ $('#seat1').bind({
 			}
 		}
 	}
-}
+});
 
 $('#seat2').bind({
 	click: function() {
@@ -42,7 +45,7 @@ $('#seat2').bind({
 			}
 		}
 	}
-}
+});
 
 $('#seat3').bind({
 	click: function() {
@@ -65,4 +68,4 @@ $('#seat3').bind({
 			}
 		}
 	}
-}
+});

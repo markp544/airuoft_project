@@ -10,9 +10,9 @@ class Seats extends CI_Controller {
 		$this->load->helper('url');
 		//$data['main'] = 'seatview.php';
 		$data['main'] = 'seatview2.php';
-		$data['seat1'] = "green";
-		$data['seat2'] = "white";
-		$data['seat3'] = "yellow";
+		$data['seat1'] = "white";
+		$data['seat2'] = "yellow";
+		$data['seat3'] = "green";
 		$this->load->view('template',$data);
 	}
 	

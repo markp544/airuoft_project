@@ -11,7 +11,7 @@ class Validateinfo extends CI_Controller {
         $this->load->helper(array('form', 'url'));
 
         $this->load->library('form_validation');
-        
+
         $data['main'] = 'customerinfoform';
 
         $this->load->view('template', $data);
@@ -27,15 +27,38 @@ class Validateinfo extends CI_Controller {
             $data['main'] = 'customerinfoform';
         } else {
             //$this->load->view('summary');
-            $data['firstname'] = $this->input->post('firstname');
-            $data['lastname'] = $this->input->post('lastname');
-            $data['creditcard'] = $this->input->post('creditcard');
-            $data['expirationdate'] = $this->input->post('expirationdate');
-            $data['main'] = 'summary';
+
+            if (isset($_SESSION['flight_id']) && isset($_SESSION['seat'])) {
+                $flight_id = $_SESSION['flight_id'];
+                $seat = $_SESSION['seat'];
+                
+                unset($_SESSION['flight_id']);
+                unset($_SESSION['seat']);
+                
+                $data['firstname'] = $this->input->post('firstname');
+                $data['lastname'] = $this->input->post('lastname');
+                $data['creditcard'] = $this->input->post('creditcard');
+                $data['expirationdate'] = $this->input->post('expirationdate');
+                $data['main'] = 'summary';
+
+                // Add ticket to database
+                if (addTicket($flight_id, $seat, 
+                        $data['firstname'], $data['lastname'], 
+                        $data['creditcard'], $data['expirationdate']) == false){
+                    $data['dberror'] = true;
+                }
+                
+                if (isset($_SESSION["errno"])){
+                    $data['errmsg'] = $_SESSION['errmsg'];
+                    $data['errno'] = $_SESSION['errno'];
+                    
+                    unset($_SESSION['errmsg']);
+                    unset($_SESSION['errno']);
+                }
+            }
         }
-        
+
         $this->load->view('template', $data);
-        
     }
 
     function expirationDateCheck($date) {
@@ -43,16 +66,12 @@ class Validateinfo extends CI_Controller {
         $datetrim = trim($date);
         $month = substr($datetrim, 0, 2);
         $year = substr($datetrim, 3, 2);
-        
-        $this->form_validation->set_message('expirationDateCheck', 
-                'Invalid expiration date format.');
-        if (preg_match("/^[0-9]{2}\/[0-9]{2}$/", $datetrim) == 1 
-                && intval($year) >= 0
-                && intval($month) > 0) {
 
-            $this->form_validation->set_message('expirationDateCheck', 
-                'Credit card is expired.');
-            
+        $this->form_validation->set_message('expirationDateCheck', 'Invalid expiration date format.');
+        if (preg_match("/^[0-9]{2}\/[0-9]{2}$/", $datetrim) == 1 && intval($year) >= 0 && intval($month) > 0) {
+
+            $this->form_validation->set_message('expirationDateCheck', 'Credit card is expired.');
+
             if ($this->validDate($month, $year)) {
                 return true;
             }
@@ -64,12 +83,17 @@ class Validateinfo extends CI_Controller {
         date_default_timezone_set('America/Toronto');
         if (intval($year) > intval(date('y'))) {
             return true;
-        } else if (intval($year) == intval(date('y')) 
-                && intval($month) >= intval(date('m'))) {
+        } else if (intval($year) == intval(date('y')) && intval($month) >= intval(date('m'))) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public function addTicket($flight_id, $seat, $first, $last, $credit_card, $expiry) {
+        $this->load->model('flight_model');
+
+        $this->flight_model->insert_ticket($flight_id, $seat, $first, $last, $credit_card, $expiry);
     }
 
 }
